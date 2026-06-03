@@ -86,9 +86,21 @@ export default function Footer() {
           <p className="text-xs text-white/30">
             © {new Date().getFullYear()} Fast Build Inc. All rights reserved.
           </p>
-          <p className="text-xs text-white/30">
-            Licensed General Contractor — New York
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-white/30">
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="hidden sm:inline" aria-hidden="true">
+              ·
+            </span>
+            <Link to="/terms-of-service" className="hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <span className="hidden sm:inline" aria-hidden="true">
+              ·
+            </span>
+            <span>Licensed General Contractor — New York</span>
+          </div>
         </div>
       </div>
     </footer>

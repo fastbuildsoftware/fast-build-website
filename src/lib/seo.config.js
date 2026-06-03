@@ -89,6 +89,28 @@ export const routes = {
       { name: 'Contact', path: '/contact' },
     ],
   },
+  '/privacy-policy': {
+    title: `Privacy Policy | ${siteName}`,
+    description:
+      'Fast Build Inc. privacy policy: what information we collect, how we use it, SMS communications consent, and third-party sharing practices.',
+    keywords: 'Fast Build privacy policy, SMS consent, data collection',
+    image: `${siteUrl}/images/logo.png`,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Privacy Policy', path: '/privacy-policy' },
+    ],
+  },
+  '/terms-of-service': {
+    title: `Terms of Service | ${siteName}`,
+    description:
+      'Fast Build Inc. terms of service: user responsibilities, construction services offered, SMS messaging terms, and website use.',
+    keywords: 'Fast Build terms of service, SMS terms, construction contractor terms',
+    image: `${siteUrl}/images/logo.png`,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Terms of Service', path: '/terms-of-service' },
+    ],
+  },
 };
 
 export function getSEOForPath(pathname) {

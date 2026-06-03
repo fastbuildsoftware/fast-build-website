@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import SmsOptInDisclosure from '@/components/contact/SmsOptInDisclosure';
 
 const projectTypes = [
   'Residential Construction',
@@ -31,11 +32,25 @@ export default function ContactForm() {
   const [sent, setSent] = useState(false);
 
   const handleChange = (field, value) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [field]: value };
+      if (field === 'phone' && !String(value).trim()) {
+        next.smsConsent = false;
+      }
+      return next;
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.smsConsent && !form.phone.trim()) {
+      toast({
+        title: 'Phone number required',
+        description: 'Enter a phone number to opt in to SMS messages, or uncheck SMS consent.',
+        variant: 'destructive',
+      });
+      return;
+    }
     setSending(true);
     try {
       await submitContactForm(form);
@@ -121,7 +136,7 @@ export default function ContactForm() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-3">
             <div className="space-y-2">
               <Label htmlFor="phone" className="text-xs font-semibold tracking-wider uppercase">
                 Phone Number
@@ -129,27 +144,51 @@ export default function ContactForm() {
               <Input
                 id="phone"
                 type="tel"
+                autoComplete="tel"
                 placeholder="(845) 000-0000"
                 value={form.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
+                aria-describedby="sms-opt-in-disclosure"
                 className="border-border focus:border-primary font-mono"
               />
+              <p className="text-xs text-muted-foreground">
+                Optional. Required only if you wish to receive SMS updates (see disclosure below).
+              </p>
             </div>
-            <div className="space-y-2">
-              <Label className="text-xs font-semibold tracking-wider uppercase">
-                Project Type
+            <SmsOptInDisclosure />
+            <div className="flex items-start gap-3 pt-1">
+              <Checkbox
+                id="smsConsent"
+                checked={form.smsConsent}
+                onCheckedChange={(checked) => handleChange('smsConsent', checked)}
+                className="mt-0.5"
+                disabled={!form.phone.trim()}
+              />
+              <Label
+                htmlFor="smsConsent"
+                className={`text-sm leading-relaxed ${form.phone.trim() ? 'cursor-pointer' : 'cursor-not-allowed opacity-70'}`}
+              >
+                I agree to receive SMS messages from Fast Build Inc. at the phone number above. I have read the
+                SMS opt-in disclosure above, including message types, frequency, rates, and STOP/HELP
+                instructions.
               </Label>
-              <Select value={form.projectType} onValueChange={(v) => handleChange('projectType', v)}>
-                <SelectTrigger className="border-border">
-                  <SelectValue placeholder="Select type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {projectTypes.map((t) => (
-                    <SelectItem key={t} value={t}>{t}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-xs font-semibold tracking-wider uppercase">
+              Project Type
+            </Label>
+            <Select value={form.projectType} onValueChange={(v) => handleChange('projectType', v)}>
+              <SelectTrigger className="border-border">
+                <SelectValue placeholder="Select type" />
+              </SelectTrigger>
+              <SelectContent>
+                {projectTypes.map((t) => (
+                  <SelectItem key={t} value={t}>{t}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="space-y-2">
@@ -167,23 +206,11 @@ export default function ContactForm() {
             />
           </div>
 
-          {/* SMS/WhatsApp Consent */}
-          <div className="bg-secondary/50 border border-border p-5 space-y-3">
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="smsConsent"
-                checked={form.smsConsent}
-                onCheckedChange={(checked) => handleChange('smsConsent', checked)}
-                className="mt-0.5"
-              />
-              <Label htmlFor="smsConsent" className="text-sm leading-relaxed cursor-pointer">
-                I consent to receive project updates and communications via <strong>SMS and WhatsApp</strong> from Fast Build Inc. at the phone number provided.
-              </Label>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed pl-7">
-              Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time. Reply HELP for assistance. By checking this box, you agree to our messaging terms. Your consent is not a condition of purchase.
-            </p>
-          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            By submitting this form, you request contact from Fast Build Inc. about your project. SMS messages
+            are sent only if you enter a phone number and check the SMS consent box above. Your consent is not
+            a condition of purchase.
+          </p>
 
           <button
             type="submit"
