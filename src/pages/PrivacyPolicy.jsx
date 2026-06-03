@@ -70,14 +70,26 @@ const sections = [
     content: (
       <>
         <p>
-          If you provide a phone number and opt in (including via our contact form), we may use your number to
-          contact you by voice call, SMS text message, or WhatsApp regarding your project, account, scheduling,
-          and service notifications.
+          If you provide a mobile phone number and opt in (including via our contact form), we may use your number
+          to contact you by voice call or SMS text message regarding your project, scheduling, and service
+          notifications. We use your mobile number only to communicate with you about your relationship with Fast
+          Build Inc.
+        </p>
+        <p>
+          <strong>We do not sell, rent, or share your mobile phone number with third parties for their own
+          marketing or promotional purposes.</strong> Your mobile number is not shared with affiliates or
+          partners for unrelated texting campaigns.
+        </p>
+        <p>
+          <strong>Message frequency:</strong> varies based on your project and account activity. During an active
+          project you may receive periodic updates (for example, scheduling confirmations and status
+          notifications). Message volume is typically limited to a few messages per month while a project is
+          active and fewer when there is no active work.
         </p>
         <p className="border-l-4 border-primary pl-4 bg-primary/5 py-3 text-foreground">
-          By providing your phone number, you consent to receive SMS communications related to your account,
-          scheduling updates, and service notifications. Message frequency varies. Message and data rates may
-          apply.
+          By providing your phone number and opting in, you consent to receive SMS communications related to your
+          account, scheduling updates, and service notifications. Message frequency varies.{' '}
+          <strong>Message and data rates may apply.</strong>
         </p>
         <p>
           You may opt out of SMS messages at any time by replying <strong>STOP</strong>. For help, reply{' '}
@@ -94,13 +106,17 @@ const sections = [
     content: (
       <>
         <p>
-          We do not sell your personal information. We may share information only in these circumstances:
+          We do not sell your personal information. <strong>We do not share mobile phone numbers collected for
+          SMS opt-in with third parties for marketing purposes.</strong> We may share other information only in
+          these circumstances:
         </p>
         <ul className="list-disc pl-6 space-y-2 marker:text-primary">
           <li>
             <strong>Service providers:</strong> trusted vendors who help us operate our website, process contact
             form submissions (such as email delivery services), host our site, or support business operations —
             only as needed to perform those services and subject to appropriate confidentiality obligations.
+            These providers may process contact details you submit but are not permitted to use your mobile
+            number for their own marketing.
           </li>
           <li>
             <strong>Legal requirements:</strong> when required by law, court order, or government request, or to
