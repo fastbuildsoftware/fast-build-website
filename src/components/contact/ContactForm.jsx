@@ -220,7 +220,12 @@ export default function ContactForm() {
             {sending ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                SENDING...
+                {form.smsConsent ? 'SUBMITTING & SIGNING YOU UP...' : 'SENDING...'}
+              </>
+            ) : form.smsConsent ? (
+              <>
+                SUBMIT REQUEST & YES, SIGN ME UP FOR SMS
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </>
             ) : (
               <>
