@@ -33,6 +33,17 @@ The Fast Build logo lives at `public/images/logo.png` (also `public/favicon.png`
 
 Add or replace section photos in `public/images/` per `src/lib/images.js` (hero, foundation, residential, etc.).
 
+## Deploy (fastbuildinc.com)
+
+Code is on GitHub: https://github.com/fastbuildsoftware/fast-build-website
+
+**Hosting:** [Vercel](https://vercel.com) (free, HTTPS included). See **[DEPLOY.md](./DEPLOY.md)** for:
+
+1. Making the GitHub repo public (Settings → General → Change visibility)
+2. Importing the repo in Vercel and deploying
+3. Adding `fastbuildinc.com` + `www` (SSL is automatic)
+4. DNS records at your domain registrar
+
 ## Scripts
 
 - `npm run dev` — development server
