@@ -3,6 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
+import { Analytics } from '@vercel/analytics/react';
 
 import SiteLayout from './components/layout/SiteLayout';
 import Home from './pages/Home';
@@ -29,6 +30,7 @@ function App() {
         </Routes>
       </Router>
       <Toaster />
+      <Analytics />
     </QueryClientProvider>
   )
 }
